@@ -1,8 +1,8 @@
 package ivan.dev.manager.controller;
 
 import ivan.dev.manager.controller.payload.NewProductPayload;
-import ivan.dev.manager.entity.Product;
-import ivan.dev.manager.service.ProductService;
+import com.ivdev.catalogueservice.entity.Product;
+import com.ivdev.catalogueservice.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

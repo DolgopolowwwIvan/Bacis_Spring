@@ -1,21 +1,9 @@
 package ivan.dev.manager.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Product {
-
-    private Integer id;
-
-    private String title;
-
-    private Integer quantity;
-
-    private String details;
-
-    private ProductStatus status;
+public record Product(
+        int id,
+        String title,
+        int quantity,
+        String details,
+        ProductStatus status) {
 }

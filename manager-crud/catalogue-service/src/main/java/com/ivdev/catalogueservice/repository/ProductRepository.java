@@ -1,6 +1,6 @@
-package ivan.dev.manager.repository;
+package com.ivdev.catalogueservice.repository;
 
-import ivan.dev.manager.entity.Product;
+import com.ivdev.catalogueservice.entity.Product;
 
 import java.util.List;
 import java.util.Optional;

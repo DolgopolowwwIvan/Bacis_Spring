@@ -1,6 +1,6 @@
 package ivan.dev.manager.controller.payload;
 
-import ivan.dev.manager.entity.ProductStatus;
+import com.ivdev.catalogueservice.entity.ProductStatus;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;

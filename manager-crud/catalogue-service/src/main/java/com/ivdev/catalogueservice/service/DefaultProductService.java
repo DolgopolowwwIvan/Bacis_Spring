@@ -1,8 +1,8 @@
-package ivan.dev.manager.service;
+package com.ivdev.catalogueservice.service;
 
-import ivan.dev.manager.entity.Product;
-import ivan.dev.manager.entity.ProductStatus;
-import ivan.dev.manager.repository.ProductRepository;
+import com.ivdev.catalogueservice.entity.Product;
+import com.ivdev.catalogueservice.entity.ProductStatus;
+import com.ivdev.catalogueservice.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
