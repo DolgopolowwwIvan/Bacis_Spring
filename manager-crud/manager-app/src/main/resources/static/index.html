@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Добро пожаловать &ndash; ivdev</title>
+    <link rel="stylesheet" href="/styles/app.css">
 </head>
 <body>
-<h1>Добро пожаловать!</h1>
+<main class="app-shell home-hero">
+    <section class="home-panel">
+        <a class="brand" href="/catalogue/products/list">
+            <span class="brand-mark">iv</span>
+            <span>manager page</span>
+        </a>
+        <div class="page-header">
+            <div>
+                <p class="eyebrow">Панель управления</p>
+                <h1>Каталог товаров</h1>
+                <p class="lead">Интерфейс для добавления, просмотра и редактирования товарных карточек.</p>
+            </div>
+        </div>
+        <div class="button-row">
+            <a class="button" href="/catalogue/products/list">Открыть каталог</a>
+            <a class="button secondary" href="/catalogue/products/create">Создать товар</a>
+        </div>
+    </section>
+</main>
 </body>
 </html>

@@ -1,28 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Список товаров &ndash; ivdev</title>
+    <link rel="stylesheet" data-th-href="@{/styles/app.css}" href="/styles/app.css">
 </head>
 <body>
-<a data-th-href="@{/catalogue/products/create}">+ Создать товар</a>
-<h1>Список товаров</h1>
-<table>
-    <thead>
-    <tr>
-        <th>#</th>
-        <th>Товар</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr data-th-each="product : ${products}">
-        <td data-th-text="${product.id}"></td>
-        <td>
-            <a data-th-href="@{/catalogue/products/{productId}(productId=${product.id})}"
-               data-th-text="${product.title}"></a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<main class="app-shell">
+    <header class="topbar">
+        <a class="brand" data-th-href="@{/catalogue/products/list}">
+            <span class="brand-mark">iv</span>
+            <span>ivdev manager</span>
+        </a>
+        <nav class="nav-actions">
+            <a class="button" data-th-href="@{/catalogue/products/create}">+ Новый товар</a>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <div>
+            <p class="eyebrow">Каталог</p>
+            <h1>Список товаров</h1>
+        </div>
+    </section>
+
+    <section class="panel">
+        <div class="panel-header">
+            <h2 class="panel-title">Товары</h2>
+            <span class="metric">Всего: <span data-th-text="${products.size()}">0</span></span>
+        </div>
+        <div class="empty-state" data-th-if="${products.empty}">
+            <h2>Каталог пока пуст</h2>
+            <p>Создайте новый товар, чтобы начать работу.</p>
+            <a class="button" data-th-href="@{/catalogue/products/create}">Создать товар</a>
+        </div>
+        <table class="product-table" data-th-if="${!products.empty}">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Товар</th>
+                <th>Действие</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-th-each="product : ${products}">
+                <td><span class="id-badge" data-th-text="${product.id}"></span></td>
+                <td>
+                    <a class="product-link"
+                       data-th-href="@{/catalogue/products/{productId}(productId=${product.id})}"
+                       data-th-text="${product.title}"></a>
+                </td>
+                <td>
+                    <a class="button secondary"
+                       data-th-href="@{/catalogue/products/{productId}(productId=${product.id})}">Открыть</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
 </body>
 </html>

@@ -8,11 +8,11 @@ public interface ProductService {
 
     List<Product> findAllProducts();
 
-    Product createProduct(String title, String details);
+    Product createProduct(String title, Integer quantity, String details);
 
     Optional<Product> findProduct(int productId);
 
-    void updateProduct(Integer id, String title, String details);
+    void updateProduct(Integer id, String title, Integer quantity, String details);
 
     void deleteProduct(Integer id);
 }

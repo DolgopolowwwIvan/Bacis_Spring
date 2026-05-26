@@ -1,20 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>[[${product.title}]] &ndash; ivdev</title>
+    <link rel="stylesheet" data-th-href="@{/styles/app.css}" href="/styles/app.css">
 </head>
 <body>
-<a data-th-href="@{/catalogue/products/list}">&larr; К списку товаров</a>
-<h1 data-th-text="${product.title}"></h1>
-<ul>
-    <li><strong>ID</strong>: <span data-th-text="${product.id}"></span></li>
-    <li><strong>Название</strong>: <span data-th-text="${product.title}"></span></li>
-    <li><strong>Описание</strong>: <span data-th-text="${product.details}"></span></li>
-</ul>
-<a data-th-href="@{/catalogue/products/{productId}/edit(productId=${product.id})}">Изменить</a>
-<form method="post" data-th-action="@{/catalogue/products/{productId}/delete(productId=${product.id})}">
-    <button type="submit">Удалить</button>
-</form>
+<main class="app-shell">
+    <header class="topbar">
+        <a class="brand" data-th-href="@{/catalogue/products/list}">
+            <span class="brand-mark">iv</span>
+            <span>ivdev manager</span>
+        </a>
+        <nav class="nav-actions">
+            <a class="button secondary" data-th-href="@{/catalogue/products/list}">&larr; К списку</a>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <div>
+            <p class="eyebrow">Карточка товара</p>
+            <h1 data-th-text="${product.title}">Название товара</h1>
+            <p class="lead">Просмотр основных данных товара и быстрые действия для управления карточкой.</p>
+        </div>
+        <div class="button-row">
+            <a class="button" data-th-href="@{/catalogue/products/{productId}/edit(productId=${product.id})}">Изменить</a>
+            <form class="inline-form" method="post" data-th-action="@{/catalogue/products/{productId}/delete(productId=${product.id})}">
+                <button class="button danger" type="submit">Удалить</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="panel">
+        <div class="details-grid">
+            <article class="detail-item">
+                <p class="detail-label">ID</p>
+                <p class="detail-value" data-th-text="${product.id}">1</p>
+            </article>
+            <article class="detail-item">
+                <p class="detail-label">Название</p>
+                <p class="detail-value" data-th-text="${product.title}">Название товара</p>
+            </article>
+            <article class="detail-item">
+                <p class="detail-label">Описание</p>
+                <p class="detail-value muted" data-th-text="${product.details}">Описание товара</p>
+            </article>
+            <article class="detail-item">
+                <p class="detail-label">Количество</p>
+                <p class="detail-value" data-th-text="${product.quantity}">Количество товара</p>
+            </article>
+        </div>
+    </section>
+</main>
 </body>
 </html>

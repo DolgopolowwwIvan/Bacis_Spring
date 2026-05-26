@@ -1,11 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-th-text="#{'errors.404.title'}"></title>
+    <link rel="stylesheet" data-th-href="@{/styles/app.css}" href="/styles/app.css">
 </head>
 <body>
-<h1 data-th-text="#{'errors.404.header'}"></h1>
-<h2 data-th-text="${error}"></h2>
+<main class="app-shell">
+    <header class="topbar">
+        <a class="brand" data-th-href="@{/catalogue/products/list}">
+            <span class="brand-mark">iv</span>
+            <span>ivdev manager</span>
+        </a>
+    </header>
+
+    <section class="panel form-card">
+        <p class="error-code">404</p>
+        <h1 data-th-text="#{'errors.404.header'}">Ошибка 404</h1>
+        <p class="lead" data-th-text="${error}">Страница не найдена</p>
+        <div class="button-row">
+            <a class="button" data-th-href="@{/catalogue/products/list}">Вернуться в каталог</a>
+        </div>
+    </section>
+</main>
 </body>
 </html>

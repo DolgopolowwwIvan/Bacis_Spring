@@ -1,28 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Редактирование товара &laquo;[[${product.title}]]&raquo; &ndash; ivdev</title>
+    <link rel="stylesheet" data-th-href="@{/styles/app.css}" href="/styles/app.css">
 </head>
 <body>
-<a data-th-href="@{/catalogue/products/{productId}(productId=${product.id})}">&larr; К товару</a>
-<h1>Редактирование товара &laquo;[[${product.title}]]</h1>
-<div data-th-if="${errors}">
-    <h2>Допущены ошибки</h2>
-    <ul>
-        <li data-th-each="error: ${errors}" data-th-text="${error}"></li>
-    </ul>
-</div>
-<form method="post" data-th-action="@{/catalogue/products/{productId}/edit(productId=${product.id})}">
-    <label>
-        Название:<br>
-        <input type="text" name="title" data-th-value="${payload != null ? payload.title : product.title}">
-    </label><br>
-    <label>
-        Описание:<br>
-        <textarea name="details" data-th-text="${payload != null ? payload.details : product.details}"></textarea>
-    </label><br>
-    <button type="submit">Изменить</button>
-</form>
+<main class="app-shell">
+    <header class="topbar">
+        <a class="brand" data-th-href="@{/catalogue/products/list}">
+            <span class="brand-mark">iv</span>
+            <span>ivdev manager</span>
+        </a>
+        <nav class="nav-actions">
+            <a class="button secondary" data-th-href="@{/catalogue/products/{productId}(productId=${product.id})}">&larr; К товару</a>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <div>
+            <p class="eyebrow">Редактирование</p>
+            <h1>Редактирование товара</h1>
+            <p class="lead" data-th-text="${product.title}">Название товара</p>
+        </div>
+    </section>
+
+    <section class="panel form-card">
+        <div class="alert" data-th-if="${errors}">
+            <h2>Допущены ошибки</h2>
+            <ul>
+                <li data-th-each="error: ${errors}" data-th-text="${error}"></li>
+            </ul>
+        </div>
+        <form class="form-grid" method="post" data-th-action="@{/catalogue/products/{productId}/edit(productId=${product.id})}">
+            <label class="field">
+                <span>Название</span>
+                <input type="text" name="title" data-th-value="${payload != null ? payload.title : product.title}">
+            </label>
+            <label class="field">
+                <span>Количество</span>
+                <input type="number" name="quantity" data-th-value="${payload != null ? payload.quantity : product.quantity}">
+            </label>
+            <label class="field">
+                <span>Описание</span>
+                <textarea name="details" data-th-text="${payload != null ? payload.details : product.details}"></textarea>
+            </label>
+            <div class="button-row">
+                <button class="button" type="submit">Сохранить изменения</button>
+                <a class="button secondary" data-th-href="@{/catalogue/products/{productId}(productId=${product.id})}">Отмена</a>
+            </div>
+        </form>
+    </section>
+</main>
 </body>
 </html>
