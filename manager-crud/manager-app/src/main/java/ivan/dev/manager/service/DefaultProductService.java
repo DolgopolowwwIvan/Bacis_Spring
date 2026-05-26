@@ -1,6 +1,7 @@
 package ivan.dev.manager.service;
 
 import ivan.dev.manager.entity.Product;
+import ivan.dev.manager.entity.ProductStatus;
 import ivan.dev.manager.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,29 +22,50 @@ public class DefaultProductService implements ProductService {
     }
 
     @Override
-    public Product createProduct(String title, Integer quantity, String details) {
-        return this.productRepository.save(new Product(null, title, quantity, details));
+    public Product createProduct(
+            String title,
+            Integer quantity,
+            String details,
+            ProductStatus status
+    ){
+        return this.productRepository.save(new Product(
+                null,
+                title,
+                quantity,
+                details,
+                status));
     }
 
     @Override
-    public Optional<Product> findProduct(int productId) {
+    public Optional<Product> findProduct(
+            int productId
+    ){
         return this.productRepository.findById(productId);
     }
 
     @Override
-    public void updateProduct(Integer id, String title, Integer quantity, String details) {
+    public void updateProduct(
+            Integer id,
+            String title,
+            Integer quantity,
+            String details,
+            ProductStatus status
+    ){
         this.productRepository.findById(id)
                 .ifPresentOrElse(product -> {
                     product.setTitle(title);
                     product.setQuantity(quantity);
                     product.setDetails(details);
+                    product.setStatus(status);
                 }, () -> {
                     throw new NoSuchElementException();
                 });
     }
 
     @Override
-    public void deleteProduct(Integer id) {
+    public void deleteProduct(
+            Integer id
+    ){
         this.productRepository.deleteById(id);
     }
 }

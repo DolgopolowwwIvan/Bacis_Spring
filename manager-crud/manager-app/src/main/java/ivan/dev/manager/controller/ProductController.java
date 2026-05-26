@@ -27,7 +27,9 @@ public class ProductController {
     private final MessageSource messageSource;
 
     @ModelAttribute("product")
-    public Product product(@PathVariable("productId") int productId) {
+    public Product product(
+            @PathVariable("productId") int productId
+    ){
         return this.productService.findProduct(productId)
                 .orElseThrow(() -> new NoSuchElementException("catalogue.errors.product.not_found"));
     }
@@ -43,10 +45,12 @@ public class ProductController {
     }
 
     @PostMapping("edit")
-    public String updateProduct(@ModelAttribute(name = "product", binding = false) Product product,
-                                @Valid UpdateProductPayload payload,
-                                BindingResult bindingResult,
-                                Model model) {
+    public String updateProduct(
+            @ModelAttribute(name = "product", binding = false) Product product,
+            @Valid UpdateProductPayload payload,
+            BindingResult bindingResult,
+            Model model
+    ){
         if (bindingResult.hasErrors()) {
             model.addAttribute("payload", payload);
             model.addAttribute("errors", bindingResult.getAllErrors().stream()
@@ -54,20 +58,32 @@ public class ProductController {
                     .toList());
             return "catalogue/products/edit";
         } else {
-            this.productService.updateProduct(product.getId(), payload.title(), payload.quantity(), payload.details());
+            this.productService.updateProduct(
+                    product.getId(),
+                    payload.title(),
+                    payload.quantity(),
+                    payload.details(),
+                    payload.status()
+            );
             return "redirect:/catalogue/products/%d".formatted(product.getId());
         }
     }
 
     @PostMapping("delete")
-    public String deleteProduct(@ModelAttribute("product") Product product) {
+    public String deleteProduct(
+            @ModelAttribute("product") Product product
+    ){
         this.productService.deleteProduct(product.getId());
         return "redirect:/catalogue/products/list";
     }
 
     @ExceptionHandler(NoSuchElementException.class)
-    public String handleNoSuchElementException(NoSuchElementException exception, Model model,
-                                               HttpServletResponse response, Locale locale) {
+    public String handleNoSuchElementException(
+            NoSuchElementException exception,
+            Model model,
+            HttpServletResponse response,
+            Locale locale
+    ){
         response.setStatus(HttpStatus.NOT_FOUND.value());
         model.addAttribute("error",
                 this.messageSource.getMessage(exception.getMessage(), new Object[0],

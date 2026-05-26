@@ -46,6 +46,13 @@
                 <span>Описание</span>
                 <textarea name="details" data-th-text="${payload != null ? payload.details : product.details}"></textarea>
             </label>
+            <label class="field">
+                <span>Статус</span>
+                <select name="status">
+                    <option value="ACTIVE" data-th-selected="${(payload != null ? payload.status : product.status)?.name() == 'ACTIVE'}">Активен</option>
+                    <option value="INACTIVE" data-th-selected="${(payload != null ? payload.status : product.status)?.name() == 'INACTIVE'}">Скрыт</option>
+                </select>
+            </label>
             <div class="button-row">
                 <button class="button" type="submit">Сохранить изменения</button>
                 <a class="button secondary" data-th-href="@{/catalogue/products/{productId}(productId=${product.id})}">Отмена</a>

@@ -16,7 +16,9 @@ public class InMemoryProductRepository implements ProductRepository {
     }
 
     @Override
-    public Product save(Product product) {
+    public Product save(
+            Product product
+    ){
         product.setId(this.products.stream()
                 .max(Comparator.comparingInt(Product::getId))
                 .map(Product::getId)
@@ -26,14 +28,18 @@ public class InMemoryProductRepository implements ProductRepository {
     }
 
     @Override
-    public Optional<Product> findById(Integer productId) {
+    public Optional<Product> findById(
+            Integer productId
+    ){
         return this.products.stream()
                 .filter(product -> Objects.equals(productId, product.getId()))
                 .findFirst();
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(
+            Integer id
+    ){
         this.products.removeIf(product -> Objects.equals(id, product.getId()));
     }
 }

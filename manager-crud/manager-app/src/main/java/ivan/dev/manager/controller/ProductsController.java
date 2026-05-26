@@ -21,7 +21,9 @@ public class ProductsController {
     private final ProductService productService;
 
     @GetMapping("list")
-    public String getProductsList(Model model) {
+    public String getProductsList(
+            Model model
+    ){
         model.addAttribute("products", this.productService.findAllProducts());
         return "catalogue/products/list";
     }
@@ -32,9 +34,11 @@ public class ProductsController {
     }
 
     @PostMapping("create")
-    public String createProduct(@Valid NewProductPayload payload,
-                                BindingResult bindingResult,
-                                Model model) {
+    public String createProduct(
+            @Valid NewProductPayload payload,
+            BindingResult bindingResult,
+            Model model
+    ){
         if (bindingResult.hasErrors()) {
             model.addAttribute("payload", payload);
             model.addAttribute("errors", bindingResult.getAllErrors().stream()
@@ -42,7 +46,11 @@ public class ProductsController {
                     .toList());
             return "catalogue/products/new_product";
         } else {
-            Product product = this.productService.createProduct(payload.title(), payload.quantity(), payload.details());
+            Product product = this.productService.createProduct(payload.title(),
+                    payload.quantity(),
+                    payload.details(),
+                    payload.status()
+            );
             return "redirect:/catalogue/products/%d".formatted(product.getId());
         }
     }

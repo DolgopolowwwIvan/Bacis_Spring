@@ -50,6 +50,12 @@
                 <p class="detail-label">Количество</p>
                 <p class="detail-value" data-th-text="${product.quantity}">Количество товара</p>
             </article>
+            <article class="detail-item">
+                <p class="detail-label">Статус</p>
+                <p class="status-badge"
+                   data-th-classappend="${product.status?.name() == 'ACTIVE' ? ' active' : ' inactive'}"
+                   data-th-text="${product.status?.name() == 'ACTIVE' ? 'Активен' : 'Скрыт'}">Статус</p>
+            </article>
         </div>
     </section>
 </main>

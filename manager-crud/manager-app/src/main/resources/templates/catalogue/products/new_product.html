@@ -46,6 +46,13 @@
                 <span>Описание</span>
                 <textarea name="details" data-th-text="${payload?.details}" placeholder="Например, я МОП"></textarea>
             </label>
+            <label class="field">
+                <span>Статус</span>
+                <select name="status">
+                    <option value="ACTIVE">Активен</option>
+                    <option value="INACTIVE">Скрыт</option>
+                </select>
+            </label>
             <div class="button-row">
                 <button class="button" type="submit">Создать товар</button>
                 <a class="button secondary" data-th-href="@{/catalogue/products/list}">Отмена</a>

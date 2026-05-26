@@ -1,5 +1,6 @@
 package ivan.dev.manager.controller.payload;
 
+import ivan.dev.manager.entity.ProductStatus;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
@@ -12,5 +13,7 @@ public record UpdateProductPayload(
         @NotNull(message = "{catalogue.products.update.errors.quantity_is_null}")
         Integer quantity,
         @Size(max = 1000, message = "{catalogue.products.update.errors.details_size_is_invalid}")
-        String details) {
+        String details,
+        ProductStatus status) {
+
 }

@@ -16,4 +16,6 @@ public class Product {
     private Integer quantity;
 
     private String details;
+
+    private ProductStatus status;
 }
