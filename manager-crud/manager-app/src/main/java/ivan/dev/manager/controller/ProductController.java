@@ -54,7 +54,7 @@ public class ProductController {
                     .toList());
             return "catalogue/products/edit";
         } else {
-            this.productService.updateProduct(product.getId(), payload.title(), payload.details());
+            this.productService.updateProduct(product.getId(), payload.title(), payload.quantity(), payload.details());
             return "redirect:/catalogue/products/%d".formatted(product.getId());
         }
     }

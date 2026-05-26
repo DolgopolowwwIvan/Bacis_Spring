@@ -13,5 +13,7 @@ public class Product {
 
     private String title;
 
+    private Integer quantity;
+
     private String details;
 }

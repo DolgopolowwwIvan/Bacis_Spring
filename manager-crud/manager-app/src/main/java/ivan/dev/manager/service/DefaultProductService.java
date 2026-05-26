@@ -21,8 +21,8 @@ public class DefaultProductService implements ProductService {
     }
 
     @Override
-    public Product createProduct(String title, String details) {
-        return this.productRepository.save(new Product(null, title, details));
+    public Product createProduct(String title, Integer quantity, String details) {
+        return this.productRepository.save(new Product(null, title, quantity, details));
     }
 
     @Override
@@ -31,10 +31,11 @@ public class DefaultProductService implements ProductService {
     }
 
     @Override
-    public void updateProduct(Integer id, String title, String details) {
+    public void updateProduct(Integer id, String title, Integer quantity, String details) {
         this.productRepository.findById(id)
                 .ifPresentOrElse(product -> {
                     product.setTitle(title);
+                    product.setQuantity(quantity);
                     product.setDetails(details);
                 }, () -> {
                     throw new NoSuchElementException();

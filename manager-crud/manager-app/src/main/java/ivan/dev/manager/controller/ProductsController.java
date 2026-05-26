@@ -42,7 +42,7 @@ public class ProductsController {
                     .toList());
             return "catalogue/products/new_product";
         } else {
-            Product product = this.productService.createProduct(payload.title(), payload.details());
+            Product product = this.productService.createProduct(payload.title(), payload.quantity(), payload.details());
             return "redirect:/catalogue/products/%d".formatted(product.getId());
         }
     }
