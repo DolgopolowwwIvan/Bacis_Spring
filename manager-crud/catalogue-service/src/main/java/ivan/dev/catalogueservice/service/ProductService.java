@@ -1,7 +1,7 @@
-package com.ivdev.catalogueservice.service;
+package ivan.dev.catalogueservice.service;
 
-import com.ivdev.catalogueservice.entity.Product;
-import com.ivdev.catalogueservice.entity.ProductStatus;
+import ivan.dev.catalogueservice.entity.Product;
+import ivan.dev.catalogueservice.entity.ProductStatus;
 
 import java.util.List;
 import java.util.Optional;

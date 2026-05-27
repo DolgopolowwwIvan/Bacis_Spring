@@ -1,4 +1,4 @@
-package com.ivdev.catalogueservice;
+package ivan.dev.catalogueservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

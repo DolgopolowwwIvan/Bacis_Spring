@@ -1,6 +1,6 @@
-package com.ivdev.catalogueservice.repository;
+package ivan.dev.catalogueservice.repository;
 
-import com.ivdev.catalogueservice.entity.Product;
+import ivan.dev.catalogueservice.entity.Product;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;

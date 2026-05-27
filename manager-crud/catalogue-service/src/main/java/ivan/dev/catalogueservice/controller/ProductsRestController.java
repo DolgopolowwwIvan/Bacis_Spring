@@ -1,0 +1,63 @@
+package ivan.dev.catalogueservice.controller;
+
+import ivan.dev.catalogueservice.controller.payload.NewProductPayload;
+import ivan.dev.catalogueservice.entity.Product;
+import ivan.dev.catalogueservice.service.ProductService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("catalogue-api/products")
+public class ProductsRestController {
+
+    private final ProductService productService;
+
+    @GetMapping
+    public List<Product> findProducts() {
+        return this.productService.findAllProducts();
+    }
+
+    @PostMapping
+    public ResponseEntity<?> createProduct(
+            @Valid @RequestBody NewProductPayload payload,
+            BindingResult bindingResult,
+            UriComponentsBuilder uriComponentsBuilder
+    )
+            throws BindException
+    {
+        if (bindingResult.hasErrors()) {
+            if (bindingResult instanceof BindException exception) {
+                throw exception;
+            } else {
+                throw new BindException(bindingResult);
+            }
+        } else {
+            Product product = this.productService.createProduct(
+                    payload.title(),
+                    payload.quantity(),
+                    payload.details(),
+                    payload.status()
+                    );
+
+            return ResponseEntity
+                    .created(uriComponentsBuilder
+                            .replacePath("/catalogue-api/products/{productId}")
+                            .build(Map.of("productId", product.getId())))
+                    .body(product);
+        }
+    }
+
+}
