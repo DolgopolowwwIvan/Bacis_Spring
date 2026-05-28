@@ -140,6 +140,17 @@ h1 {
     font-weight: 700;
 }
 
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+}
+
+.search-input {
+    width: min(320px, 34vw);
+}
+
 .product-table {
     width: 100%;
     border-collapse: collapse;
@@ -437,6 +448,17 @@ textarea:focus {
     .button,
     .inline-form {
         width: 100%;
+    }
+
+    .search-form,
+    .search-input {
+        width: 100%;
+    }
+
+    .search-form {
+        flex-direction: column;
+        align-items: stretch;
+        margin-left: 0;
     }
 
     .product-table thead {

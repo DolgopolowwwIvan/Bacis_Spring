@@ -28,12 +28,28 @@
     <section class="panel">
         <div class="panel-header">
             <h2 class="panel-title">Товары</h2>
+            <form class="search-form" method="get" data-th-action="@{/catalogue/products/list}">
+                <input class="search-input"
+                       type="search"
+                       name="filter"
+                       placeholder="Поиск по названию"
+                       data-th-value="${filter}">
+                <button class="button secondary" type="submit">Найти</button>
+                <a class="button secondary"
+                   data-th-if="${filter != null && !filter.isBlank()}"
+                   data-th-href="@{/catalogue/products/list}">Сбросить</a>
+            </form>
             <span class="metric">Всего: <span data-th-text="${products.size()}">0</span></span>
         </div>
         <div class="empty-state" data-th-if="${products.empty}">
-            <h2>Каталог пока пуст</h2>
-            <p>Создайте новый товар, чтобы начать работу.</p>
-            <a class="button" data-th-href="@{/catalogue/products/create}">Создать товар</a>
+            <h2 data-th-text="${filter != null && !filter.isBlank() ? 'Ничего не найдено' : 'Каталог пока пуст'}">Каталог пока пуст</h2>
+            <p data-th-text="${filter != null && !filter.isBlank() ? 'Попробуйте изменить поисковый запрос.' : 'Создайте новый товар, чтобы начать работу.'}">Создайте новый товар, чтобы начать работу.</p>
+            <a class="button"
+               data-th-if="${filter == null || filter.isBlank()}"
+               data-th-href="@{/catalogue/products/create}">Создать товар</a>
+            <a class="button secondary"
+               data-th-if="${filter != null && !filter.isBlank()}"
+               data-th-href="@{/catalogue/products/list}">Сбросить поиск</a>
         </div>
         <table class="product-table" data-th-if="${!products.empty}">
             <thead>
