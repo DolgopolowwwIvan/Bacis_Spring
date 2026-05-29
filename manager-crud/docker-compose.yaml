@@ -1,20 +1,43 @@
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: manager_app_db
+    container_name: manager_crud_db
     environment:
-      POSTGRES_DB: "manager_app_db"
+      POSTGRES_DB: "catalogue_db"
       POSTGRES_USER: "admin"
       POSTGRES_PASSWORD: "admin"
       PGDATA: "/var/lib/postgresql/data/pgdata"
     volumes:
       - ./init-scripts:/docker-entrypoint-initdb.d
-      - manager_app_db:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     restart: unless-stopped
     cpus: '1'
     mem_limit: 4g
+    networks:
+      - manager_crud_network
 
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.6.1
+    container_name: manager_crud_keycloak
+    restart: unless-stopped
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+    volumes:
+      - keycloak_data:/opt/keycloak/data
+      - ./config/keycloak:/opt/keycloak/data/import:ro
+    ports:
+      - "127.0.0.1:8181:8080"
+    command: start-dev --import-realm
+    networks:
+      - manager_crud_network
+
+networks:
+  manager_crud_network:
+    driver: bridge
+    
 volumes:
-  manager_app_db:
+  postgres_data:
+  keycloak_data:
