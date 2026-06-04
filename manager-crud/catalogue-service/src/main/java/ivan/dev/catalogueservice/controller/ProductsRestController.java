@@ -3,7 +3,6 @@ package ivan.dev.catalogueservice.controller;
 import ivan.dev.catalogueservice.controller.payload.NewProductPayload;
 import ivan.dev.catalogueservice.entity.Product;
 import ivan.dev.catalogueservice.service.ProductService;
-import jakarta.servlet.Filter;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

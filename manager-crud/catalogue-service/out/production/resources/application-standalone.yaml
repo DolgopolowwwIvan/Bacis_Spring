@@ -1,24 +1,21 @@
 server:
   port: 8081
-
 spring:
-  security:
-    user:
-      name: catalogue_service_user
-      password: password
-      roles:
-        - ADMIN
   datasource:
-    url: jdbc:postgresql://localhost:5432/manager_app_db
+    url: jdbc:postgresql://localhost:5432/catalogue_db
     username: admin
     password: admin
   flyway:
     schemas:
       - public
-      - manager_app_db
+      - catalogue
   jpa:
     show-sql: true
-
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8181/realms/manager-crud
 logging:
   level:
     sql: info
